@@ -5,7 +5,7 @@
 <title>★★★★★ × PARADOX</title>
 <meta name="robots" content="noindex">
 <style>
-:root{--bg:#000000;--ease:cubic-bezier(.22,.61,.36,1);--ui:#ffffff}
+:root{--bg:#000000;--ease:cubic-bezier(.22,.61,.36,1);--ui:#ffffff;--fw:min(100vw, calc(100svh * 16 / 9))}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:var(--bg)}
 body{transition:background-color .8s var(--ease);overflow:hidden}
@@ -13,7 +13,7 @@ main{height:100svh;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-widt
 main::-webkit-scrollbar{display:none}
 .slide{height:100svh;scroll-snap-align:center;display:flex;align-items:center;justify-content:center}
 .stage{
-  position:relative; width:min(100vw, calc(100svh * 16 / 9)); aspect-ratio:16/9;
+  position:relative; width:var(--fw); aspect-ratio:16/9;
   opacity:0; transform:scale(.988);
   transition:opacity 1s var(--ease), transform 1.1s var(--ease);
 }
@@ -21,16 +21,43 @@ main::-webkit-scrollbar{display:none}
 .stage img{width:100%;height:100%;display:block}
 .ui{
   position:absolute; right:clamp(14px,2.2vw,34px); bottom:clamp(12px,2.2vw,28px);
-  display:flex; align-items:center; gap:10px; z-index:2; color:var(--ui);
+  display:flex; align-items:center; gap:10px; z-index:3; color:var(--ui);
   font:400 10px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace; letter-spacing:.2em;
   opacity:0; transform:translateY(4px);
   transition:opacity .45s var(--ease), transform .45s var(--ease);
 }
-[data-ink="dark"] .ui{--ui:#000000}
-.stage:hover .ui,.ui:focus-within,.slide.picked .ui{opacity:1;transform:none}
+[data-ink="dark"] .ui,[data-ink="dark"] .legend{--ui:#000000}
+:root[data-ink="dark"]{--ui:#000000}
+:root{--ui:#ffffff}
+.hot{position:absolute;top:0;right:0;bottom:0;width:clamp(120px,18%,300px);z-index:2}
+.hot:hover ~ .ui,.ui:hover,.ui:focus-within,.slide.picked .ui{opacity:1;transform:none}
 .ui a{color:var(--ui);text-decoration:none;opacity:.5;transition:opacity .25s}
 .ui i{opacity:.25;font-style:normal}
 .ui a:hover,.ui a:focus-visible{opacity:1}
+.legend{
+  position:absolute; left:clamp(14px,2.2vw,34px); bottom:calc(clamp(12px,2.2vw,28px) + 52px); z-index:3;
+  color:var(--ui); opacity:.45;
+  font:400 10px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace; letter-spacing:.16em; text-transform:uppercase;
+}
+.legend p{display:flex;align-items:baseline;gap:12px;margin-bottom:9px}
+.legend b{font-weight:400;min-width:30px;opacity:.9}
+.legend span{opacity:.62}
+#send{
+  position:fixed; left:50%; top:clamp(12px,2.2vw,28px); width:var(--fw);
+  transform:translateX(-50%) translateY(-6px); padding-right:clamp(14px,2.2vw,34px);
+  display:flex; align-items:center; justify-content:flex-end; gap:14px; z-index:6; color:var(--ui);
+  font:400 10px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace; letter-spacing:.2em; text-transform:uppercase;
+  opacity:0; pointer-events:none; transition:opacity .45s var(--ease), transform .45s var(--ease);
+}
+#send.on{opacity:1;transform:translateX(-50%)}
+#send.on button{pointer-events:auto}
+#send button{
+  font:inherit; letter-spacing:inherit; text-transform:inherit; color:var(--ui);
+  background:none; border:1px solid currentColor; border-radius:2px; padding:9px 13px; cursor:pointer;
+  opacity:.5; transition:opacity .3s;
+}
+#send button.ghost{border-color:transparent;padding:9px 2px}
+#send button:hover,#send button:focus-visible{opacity:1}
 .jump{
   position:absolute; left:clamp(14px,2.2vw,34px); bottom:clamp(12px,2.2vw,28px); z-index:2;
   color:var(--ui); text-decoration:none; opacity:.42;
@@ -51,10 +78,17 @@ main::-webkit-scrollbar{display:none}
 @media (prefers-reduced-motion:reduce){.stage{opacity:1!important;transform:none!important;transition:none}}
 </style></head><body>
 <main id="main">
-<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-01">
+<section class="slide" id="logo-01" data-bg="#000000" data-ink="light" data-id="logo-01">
  <div class="stage">
   <img src="svg/logo-01.svg" alt="" decoding="async" width="1920" height="1080">
+    <div class="legend">
+   <p><b>&#10003;</b><span>mark the ones you like &mdash; then send them to me</span></p>
+   <p><b>PNG</b><span>download &mdash; 3840 &times; 2160 raster</span></p>
+   <p><b>SVG</b><span>download &mdash; vector, scales forever</span></p>
+   <p><b>&rarr;</b><span>controls appear at the right edge of any slide</span></p>
+  </div>
   <a class="jump" href="/logo-experiments">LOGO EXPERIMENTS &#8594;</a>
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -64,10 +98,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-02">
+<section class="slide" id="logo-02" data-bg="#000000" data-ink="light" data-id="logo-02">
  <div class="stage">
   <img src="svg/logo-02.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -77,10 +112,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-03">
+<section class="slide" id="logo-03" data-bg="#000000" data-ink="light" data-id="logo-03">
  <div class="stage">
   <img src="svg/logo-03.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -90,10 +126,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-04">
+<section class="slide" id="logo-04" data-bg="#000000" data-ink="light" data-id="logo-04">
  <div class="stage">
   <img src="svg/logo-04.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -103,10 +140,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-05">
+<section class="slide" id="logo-05" data-bg="#000000" data-ink="light" data-id="logo-05">
  <div class="stage">
   <img src="svg/logo-05.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -116,10 +154,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-06">
+<section class="slide" id="logo-06" data-bg="#000000" data-ink="light" data-id="logo-06">
  <div class="stage">
   <img src="svg/logo-06.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -129,10 +168,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-07">
+<section class="slide" id="logo-07" data-bg="#000000" data-ink="light" data-id="logo-07">
  <div class="stage">
   <img src="svg/logo-07.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -142,10 +182,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-08">
+<section class="slide" id="logo-08" data-bg="#000000" data-ink="light" data-id="logo-08">
  <div class="stage">
   <img src="svg/logo-08.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -155,10 +196,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-09">
+<section class="slide" id="logo-09" data-bg="#000000" data-ink="light" data-id="logo-09">
  <div class="stage">
   <img src="svg/logo-09.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -168,10 +210,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-10">
+<section class="slide" id="logo-10" data-bg="#000000" data-ink="light" data-id="logo-10">
  <div class="stage">
   <img src="svg/logo-10.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -181,10 +224,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-11">
+<section class="slide" id="logo-11" data-bg="#000000" data-ink="light" data-id="logo-11">
  <div class="stage">
   <img src="svg/logo-11.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -194,10 +238,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-12">
+<section class="slide" id="logo-12" data-bg="#000000" data-ink="light" data-id="logo-12">
  <div class="stage">
   <img src="svg/logo-12.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -207,10 +252,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-13">
+<section class="slide" id="logo-13" data-bg="#ffffff" data-ink="dark" data-id="logo-13">
  <div class="stage">
   <img src="svg/logo-13.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -220,10 +266,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-14">
+<section class="slide" id="logo-14" data-bg="#ffffff" data-ink="dark" data-id="logo-14">
  <div class="stage">
   <img src="svg/logo-14.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -233,10 +280,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-15">
+<section class="slide" id="logo-15" data-bg="#ffffff" data-ink="dark" data-id="logo-15">
  <div class="stage">
   <img src="svg/logo-15.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -246,10 +294,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-16">
+<section class="slide" id="logo-16" data-bg="#000000" data-ink="light" data-id="logo-16">
  <div class="stage">
   <img src="svg/logo-16.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -259,10 +308,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-17">
+<section class="slide" id="logo-17" data-bg="#000000" data-ink="light" data-id="logo-17">
  <div class="stage">
   <img src="svg/logo-17.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -272,10 +322,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-18">
+<section class="slide" id="logo-18" data-bg="#ffffff" data-ink="dark" data-id="logo-18">
  <div class="stage">
   <img src="svg/logo-18.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -285,10 +336,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-19">
+<section class="slide" id="logo-19" data-bg="#ffffff" data-ink="dark" data-id="logo-19">
  <div class="stage">
   <img src="svg/logo-19.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -298,10 +350,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-20">
+<section class="slide" id="logo-20" data-bg="#ffffff" data-ink="dark" data-id="logo-20">
  <div class="stage">
   <img src="svg/logo-20.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -311,10 +364,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-21">
+<section class="slide" id="logo-21" data-bg="#ffffff" data-ink="dark" data-id="logo-21">
  <div class="stage">
   <img src="svg/logo-21.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -324,10 +378,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-22">
+<section class="slide" id="logo-22" data-bg="#ffffff" data-ink="dark" data-id="logo-22">
  <div class="stage">
   <img src="svg/logo-22.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -337,10 +392,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-23">
+<section class="slide" id="logo-23" data-bg="#ffffff" data-ink="dark" data-id="logo-23">
  <div class="stage">
   <img src="svg/logo-23.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -350,10 +406,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#826ab6" data-ink="light" data-id="logo-24">
+<section class="slide" id="logo-24" data-bg="#826ab6" data-ink="light" data-id="logo-24">
  <div class="stage">
   <img src="svg/logo-24.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -363,10 +420,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#826ab6" data-ink="light" data-id="logo-25">
+<section class="slide" id="logo-25" data-bg="#826ab6" data-ink="light" data-id="logo-25">
  <div class="stage">
   <img src="svg/logo-25.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -376,10 +434,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-26">
+<section class="slide" id="logo-26" data-bg="#594992" data-ink="light" data-id="logo-26">
  <div class="stage">
   <img src="svg/logo-26.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -389,10 +448,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-27">
+<section class="slide" id="logo-27" data-bg="#594992" data-ink="light" data-id="logo-27">
  <div class="stage">
   <img src="svg/logo-27.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -402,10 +462,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-28">
+<section class="slide" id="logo-28" data-bg="#594992" data-ink="light" data-id="logo-28">
  <div class="stage">
   <img src="svg/logo-28.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -415,10 +476,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-29">
+<section class="slide" id="logo-29" data-bg="#594992" data-ink="light" data-id="logo-29">
  <div class="stage">
   <img src="svg/logo-29.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -428,10 +490,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-30">
+<section class="slide" id="logo-30" data-bg="#594992" data-ink="light" data-id="logo-30">
  <div class="stage">
   <img src="svg/logo-30.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -441,10 +504,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-31">
+<section class="slide" id="logo-31" data-bg="#594992" data-ink="light" data-id="logo-31">
  <div class="stage">
   <img src="svg/logo-31.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -454,10 +518,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-32">
+<section class="slide" id="logo-32" data-bg="#594992" data-ink="light" data-id="logo-32">
  <div class="stage">
   <img src="svg/logo-32.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -467,10 +532,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-33">
+<section class="slide" id="logo-33" data-bg="#594992" data-ink="light" data-id="logo-33">
  <div class="stage">
   <img src="svg/logo-33.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -480,10 +546,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-34">
+<section class="slide" id="logo-34" data-bg="#594992" data-ink="light" data-id="logo-34">
  <div class="stage">
   <img src="svg/logo-34.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -493,10 +560,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-35">
+<section class="slide" id="logo-35" data-bg="#594992" data-ink="light" data-id="logo-35">
  <div class="stage">
   <img src="svg/logo-35.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -506,10 +574,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-36">
+<section class="slide" id="logo-36" data-bg="#594992" data-ink="light" data-id="logo-36">
  <div class="stage">
   <img src="svg/logo-36.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -519,10 +588,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-37">
+<section class="slide" id="logo-37" data-bg="#452c7c" data-ink="light" data-id="logo-37">
  <div class="stage">
   <img src="svg/logo-37.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -532,10 +602,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-38">
+<section class="slide" id="logo-38" data-bg="#452c7c" data-ink="light" data-id="logo-38">
  <div class="stage">
   <img src="svg/logo-38.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -545,10 +616,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-39">
+<section class="slide" id="logo-39" data-bg="#452c7c" data-ink="light" data-id="logo-39">
  <div class="stage">
   <img src="svg/logo-39.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -558,10 +630,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-40">
+<section class="slide" id="logo-40" data-bg="#452c7c" data-ink="light" data-id="logo-40">
  <div class="stage">
   <img src="svg/logo-40.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -571,10 +644,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-41">
+<section class="slide" id="logo-41" data-bg="#452c7c" data-ink="light" data-id="logo-41">
  <div class="stage">
   <img src="svg/logo-41.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -584,10 +658,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-42">
+<section class="slide" id="logo-42" data-bg="#452c7c" data-ink="light" data-id="logo-42">
  <div class="stage">
   <img src="svg/logo-42.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -597,10 +672,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-43">
+<section class="slide" id="logo-43" data-bg="#452c7c" data-ink="light" data-id="logo-43">
  <div class="stage">
   <img src="svg/logo-43.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -610,10 +686,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-44">
+<section class="slide" id="logo-44" data-bg="#452c7c" data-ink="light" data-id="logo-44">
  <div class="stage">
   <img src="svg/logo-44.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -623,10 +700,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-45">
+<section class="slide" id="logo-45" data-bg="#452c7c" data-ink="light" data-id="logo-45">
  <div class="stage">
   <img src="svg/logo-45.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -636,10 +714,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-46">
+<section class="slide" id="logo-46" data-bg="#452c7c" data-ink="light" data-id="logo-46">
  <div class="stage">
   <img src="svg/logo-46.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -649,10 +728,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-47">
+<section class="slide" id="logo-47" data-bg="#452c7c" data-ink="light" data-id="logo-47">
  <div class="stage">
   <img src="svg/logo-47.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -662,10 +742,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#000000" data-ink="light" data-id="tm-01">
+<section class="slide" id="tm-01" data-bg="#000000" data-ink="light" data-id="tm-01">
  <div class="stage">
   <img src="svg/tm-01.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -675,10 +756,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="tm-02">
+<section class="slide" id="tm-02" data-bg="#ffffff" data-ink="dark" data-id="tm-02">
  <div class="stage">
   <img src="svg/tm-02.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -688,10 +770,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="tm-03">
+<section class="slide" id="tm-03" data-bg="#ffffff" data-ink="dark" data-id="tm-03">
  <div class="stage">
   <img src="svg/tm-03.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -701,10 +784,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="tm-04">
+<section class="slide" id="tm-04" data-bg="#ffffff" data-ink="dark" data-id="tm-04">
  <div class="stage">
   <img src="svg/tm-04.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -714,10 +798,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#000000" data-ink="light" data-id="tm-05">
+<section class="slide" id="tm-05" data-bg="#000000" data-ink="light" data-id="tm-05">
  <div class="stage">
   <img src="svg/tm-05.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -727,10 +812,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#000000" data-ink="light" data-id="tm-06">
+<section class="slide" id="tm-06" data-bg="#000000" data-ink="light" data-id="tm-06">
  <div class="stage">
   <img src="svg/tm-06.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -740,10 +826,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#000000" data-ink="light" data-id="tm-07">
+<section class="slide" id="tm-07" data-bg="#000000" data-ink="light" data-id="tm-07">
  <div class="stage">
   <img src="svg/tm-07.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -753,10 +840,11 @@ main::-webkit-scrollbar{display:none}
   </div>
  </div>
 </section>
-<section class="slide" data-bg="#000000" data-ink="light" data-id="tm-08">
+<section class="slide" id="tm-08" data-bg="#000000" data-ink="light" data-id="tm-08">
  <div class="stage">
   <img src="svg/tm-08.svg" alt="" decoding="async" width="1920" height="1080">
   
+  <div class="hot" aria-hidden="true"></div>
   <div class="ui">
    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
@@ -767,6 +855,7 @@ main::-webkit-scrollbar{display:none}
  </div>
 </section>
 </main>
+<div id="send"><button id="sendbtn" type="button">SEND <span id="n">0</span> PICKS &#8594;</button><button id="copybtn" class="ghost" type="button">COPY</button></div>
 <script>
 const main=document.getElementById('main'), slides=[...document.querySelectorAll('.slide')],
       root=document.documentElement, KEY='paradox-logo-picks';
@@ -776,15 +865,36 @@ const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify([...picks])); }cat
 slides.forEach(s=>{
   const id=s.dataset.id, btn=s.querySelector('.pick');
   const paint=()=>{ const on=picks.has(id); s.classList.toggle('picked',on); btn.setAttribute('aria-pressed',on); };
-  btn.addEventListener('click',()=>{ picks.has(id)?picks.delete(id):picks.add(id); save(); paint(); });
+  btn.addEventListener('click',()=>{ picks.has(id)?picks.delete(id):picks.add(id); save(); paint(); bar(); });
   paint();
 });
+const NL=String.fromCharCode(10);
+const sendEl=document.getElementById('send'), nEl=document.getElementById('n');
+const order=slides.map(s=>s.dataset.id);
+const chosen=()=>order.filter(id=>picks.has(id));
+const bar=()=>{ const c=chosen(); nEl.textContent=c.length; sendEl.classList.toggle('on',c.length>0); };
+const listing=()=>{
+  const base=location.origin+location.pathname.replace(/index\.html$/,'');
+  return chosen().map(id=>'★ '+id+'  '+base+'#'+id).join(NL);
+};
+document.getElementById('sendbtn').addEventListener('click',()=>{
+  const to=['londarolichin','icloud.com'].join('@');
+  const body='These are the logo variations I like:'+NL+NL+listing()+NL;
+  location.href='mailto:'+to+'?subject='+encodeURIComponent('PARADOX logo picks')+'&body='+encodeURIComponent(body);
+});
+document.getElementById('copybtn').addEventListener('click',async e=>{
+  const t=e.currentTarget, txt=listing();
+  try{ await navigator.clipboard.writeText(txt); }
+  catch(err){ const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
+  t.textContent='COPIED'; setTimeout(()=>t.textContent='COPY',1600);
+});
+bar();
 const io=new IntersectionObserver(es=>{
   es.forEach(e=>{
     if(e.intersectionRatio>0.2) e.target.classList.add('in');
     if(e.intersectionRatio>0.55){
       const i=slides.indexOf(e.target);
-      if(i!==cur){cur=i;root.style.setProperty('--bg',e.target.dataset.bg);}
+      if(i!==cur){cur=i;root.style.setProperty('--bg',e.target.dataset.bg);root.dataset.ink=e.target.dataset.ink;}
     }
   });
 },{root:main,threshold:[0,.2,.55,.9]});
@@ -798,5 +908,6 @@ addEventListener('keydown',e=>{
   else if(k==='End'){e.preventDefault();go(slides.length-1);}
   else if(k==='Enter'){e.preventDefault();slides[cur].querySelector('.pick').click();}
 });
+root.dataset.ink=slides[0].dataset.ink;
 slides[0].classList.add('in');
 </script></body></html>
