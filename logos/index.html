@@ -43,14 +43,18 @@ main::-webkit-scrollbar{display:none}
 .legend b{font-weight:400;min-width:30px;opacity:.9}
 .legend span{opacity:.62}
 #send{
-  position:fixed; left:50%; top:clamp(12px,2.2vw,28px); width:var(--fw);
-  transform:translateX(-50%) translateY(-6px); padding-right:clamp(14px,2.2vw,34px);
-  display:flex; align-items:center; justify-content:flex-end; gap:14px; z-index:6; color:var(--ui);
+  position:fixed; left:0; right:0; top:clamp(12px,2.2vw,28px);
+  transform:translateY(-6px);
+  display:flex; justify-content:center; z-index:6; color:var(--ui);
   font:400 10px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace; letter-spacing:.2em; text-transform:uppercase;
   opacity:0; pointer-events:none; transition:opacity .45s var(--ease), transform .45s var(--ease);
 }
-#send.on{opacity:1;transform:translateX(-50%)}
+#send.on{opacity:1;transform:none}
 #send.on button{pointer-events:auto}
+#send .row{
+  width:min(100%, calc(100svh * 16 / 9)); padding-right:clamp(14px,2.2vw,34px);
+  display:flex; align-items:center; justify-content:flex-end; gap:14px;
+}
 #send button{
   font:inherit; letter-spacing:inherit; text-transform:inherit; color:var(--ui);
   background:none; border:1px solid currentColor; border-radius:2px; padding:9px 13px; cursor:pointer;
@@ -855,7 +859,7 @@ main::-webkit-scrollbar{display:none}
  </div>
 </section>
 </main>
-<div id="send"><button id="sendbtn" type="button">SEND <span id="n">0</span> PICKS &#8594;</button><button id="copybtn" class="ghost" type="button">COPY</button></div>
+<div id="send"><div class="row"><button id="sendbtn" type="button">SEND <span id="n">0</span> PICKS &#8594;</button><button id="copybtn" class="ghost" type="button">COPY</button></div></div>
 <script>
 const main=document.getElementById('main'), slides=[...document.querySelectorAll('.slide')],
       root=document.documentElement, KEY='paradox-logo-picks';
