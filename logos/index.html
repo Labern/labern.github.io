@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>★★★★★ × PARADOX</title>
+<meta name="robots" content="noindex">
+<style>
+:root{--bg:#000000;--ease:cubic-bezier(.22,.61,.36,1);--ui:#ffffff}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg)}
+body{transition:background-color .8s var(--ease);overflow:hidden}
+main{height:100svh;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+main::-webkit-scrollbar{display:none}
+.slide{height:100svh;scroll-snap-align:center;display:flex;align-items:center;justify-content:center}
+.stage{
+  position:relative; width:min(100vw, calc(100svh * 16 / 9)); aspect-ratio:16/9;
+  opacity:0; transform:scale(.988);
+  transition:opacity 1s var(--ease), transform 1.1s var(--ease);
+}
+.slide.in .stage{opacity:1;transform:none}
+.stage img{width:100%;height:100%;display:block}
+.ui{
+  position:absolute; right:clamp(14px,2.2vw,34px); bottom:clamp(12px,2.2vw,28px);
+  display:flex; align-items:center; gap:10px; z-index:2; color:var(--ui);
+  font:400 10px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace; letter-spacing:.2em;
+  opacity:0; transform:translateY(4px);
+  transition:opacity .45s var(--ease), transform .45s var(--ease);
+}
+[data-ink="dark"] .ui{--ui:#000000}
+.stage:hover .ui,.ui:focus-within,.slide.picked .ui{opacity:1;transform:none}
+.ui a{color:var(--ui);text-decoration:none;opacity:.5;transition:opacity .25s}
+.ui i{opacity:.25;font-style:normal}
+.ui a:hover,.ui a:focus-visible{opacity:1}
+.jump{
+  position:absolute; left:clamp(14px,2.2vw,34px); bottom:clamp(12px,2.2vw,28px); z-index:2;
+  color:var(--ui); text-decoration:none; opacity:.42;
+  font:400 10px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace; letter-spacing:.2em;
+  padding:9px 12px; border:1px solid currentColor; border-radius:2px;
+  transition:opacity .3s var(--ease);
+}
+.jump:hover,.jump:focus-visible{opacity:1}
+.sep{width:1px;height:11px;background:currentColor;opacity:.2}
+.pick{
+  display:grid;place-items:center;width:17px;height:17px;padding:0;border:0;background:none;
+  color:var(--ui);opacity:.38;cursor:pointer;transition:opacity .25s,transform .25s var(--ease);
+}
+.pick svg{width:15px;height:15px;display:block}
+.pick:hover{opacity:.8}
+.slide.picked .pick{opacity:1;transform:scale(1.06)}
+@media (hover:none){.ui{opacity:.55;transform:none}}
+@media (prefers-reduced-motion:reduce){.stage{opacity:1!important;transform:none!important;transition:none}}
+</style></head><body>
+<main id="main">
+<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-01">
+ <div class="stage">
+  <img src="svg/logo-01.svg" alt="" decoding="async" width="1920" height="1080">
+  <a class="jump" href="/logo-experiments">LOGO EXPERIMENTS &#8594;</a>
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-01.png" download="paradox-logo-01.png">PNG</a><i>/</i><a href="svg/logo-01.svg" download="paradox-logo-01.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-02">
+ <div class="stage">
+  <img src="svg/logo-02.svg" alt="" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-02.png" download="paradox-logo-02.png">PNG</a><i>/</i><a href="svg/logo-02.svg" download="paradox-logo-02.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-03">
+ <div class="stage">
+  <img src="svg/logo-03.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-03.png" download="paradox-logo-03.png">PNG</a><i>/</i><a href="svg/logo-03.svg" download="paradox-logo-03.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-04">
+ <div class="stage">
+  <img src="svg/logo-04.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-04.png" download="paradox-logo-04.png">PNG</a><i>/</i><a href="svg/logo-04.svg" download="paradox-logo-04.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-05">
+ <div class="stage">
+  <img src="svg/logo-05.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-05.png" download="paradox-logo-05.png">PNG</a><i>/</i><a href="svg/logo-05.svg" download="paradox-logo-05.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-06">
+ <div class="stage">
+  <img src="svg/logo-06.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-06.png" download="paradox-logo-06.png">PNG</a><i>/</i><a href="svg/logo-06.svg" download="paradox-logo-06.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-07">
+ <div class="stage">
+  <img src="svg/logo-07.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-07.png" download="paradox-logo-07.png">PNG</a><i>/</i><a href="svg/logo-07.svg" download="paradox-logo-07.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-08">
+ <div class="stage">
+  <img src="svg/logo-08.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-08.png" download="paradox-logo-08.png">PNG</a><i>/</i><a href="svg/logo-08.svg" download="paradox-logo-08.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-09">
+ <div class="stage">
+  <img src="svg/logo-09.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-09.png" download="paradox-logo-09.png">PNG</a><i>/</i><a href="svg/logo-09.svg" download="paradox-logo-09.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-10">
+ <div class="stage">
+  <img src="svg/logo-10.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-10.png" download="paradox-logo-10.png">PNG</a><i>/</i><a href="svg/logo-10.svg" download="paradox-logo-10.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-11">
+ <div class="stage">
+  <img src="svg/logo-11.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-11.png" download="paradox-logo-11.png">PNG</a><i>/</i><a href="svg/logo-11.svg" download="paradox-logo-11.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-12">
+ <div class="stage">
+  <img src="svg/logo-12.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-12.png" download="paradox-logo-12.png">PNG</a><i>/</i><a href="svg/logo-12.svg" download="paradox-logo-12.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-13">
+ <div class="stage">
+  <img src="svg/logo-13.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-13.png" download="paradox-logo-13.png">PNG</a><i>/</i><a href="svg/logo-13.svg" download="paradox-logo-13.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-14">
+ <div class="stage">
+  <img src="svg/logo-14.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-14.png" download="paradox-logo-14.png">PNG</a><i>/</i><a href="svg/logo-14.svg" download="paradox-logo-14.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-15">
+ <div class="stage">
+  <img src="svg/logo-15.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-15.png" download="paradox-logo-15.png">PNG</a><i>/</i><a href="svg/logo-15.svg" download="paradox-logo-15.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-16">
+ <div class="stage">
+  <img src="svg/logo-16.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-16.png" download="paradox-logo-16.png">PNG</a><i>/</i><a href="svg/logo-16.svg" download="paradox-logo-16.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#000000" data-ink="light" data-id="logo-17">
+ <div class="stage">
+  <img src="svg/logo-17.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-17.png" download="paradox-logo-17.png">PNG</a><i>/</i><a href="svg/logo-17.svg" download="paradox-logo-17.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-18">
+ <div class="stage">
+  <img src="svg/logo-18.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-18.png" download="paradox-logo-18.png">PNG</a><i>/</i><a href="svg/logo-18.svg" download="paradox-logo-18.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-19">
+ <div class="stage">
+  <img src="svg/logo-19.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-19.png" download="paradox-logo-19.png">PNG</a><i>/</i><a href="svg/logo-19.svg" download="paradox-logo-19.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-20">
+ <div class="stage">
+  <img src="svg/logo-20.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-20.png" download="paradox-logo-20.png">PNG</a><i>/</i><a href="svg/logo-20.svg" download="paradox-logo-20.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-21">
+ <div class="stage">
+  <img src="svg/logo-21.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-21.png" download="paradox-logo-21.png">PNG</a><i>/</i><a href="svg/logo-21.svg" download="paradox-logo-21.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-22">
+ <div class="stage">
+  <img src="svg/logo-22.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-22.png" download="paradox-logo-22.png">PNG</a><i>/</i><a href="svg/logo-22.svg" download="paradox-logo-22.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="logo-23">
+ <div class="stage">
+  <img src="svg/logo-23.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-23.png" download="paradox-logo-23.png">PNG</a><i>/</i><a href="svg/logo-23.svg" download="paradox-logo-23.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#826ab6" data-ink="light" data-id="logo-24">
+ <div class="stage">
+  <img src="svg/logo-24.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-24.png" download="paradox-logo-24.png">PNG</a><i>/</i><a href="svg/logo-24.svg" download="paradox-logo-24.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#826ab6" data-ink="light" data-id="logo-25">
+ <div class="stage">
+  <img src="svg/logo-25.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-25.png" download="paradox-logo-25.png">PNG</a><i>/</i><a href="svg/logo-25.svg" download="paradox-logo-25.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-26">
+ <div class="stage">
+  <img src="svg/logo-26.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-26.png" download="paradox-logo-26.png">PNG</a><i>/</i><a href="svg/logo-26.svg" download="paradox-logo-26.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-27">
+ <div class="stage">
+  <img src="svg/logo-27.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-27.png" download="paradox-logo-27.png">PNG</a><i>/</i><a href="svg/logo-27.svg" download="paradox-logo-27.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-28">
+ <div class="stage">
+  <img src="svg/logo-28.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-28.png" download="paradox-logo-28.png">PNG</a><i>/</i><a href="svg/logo-28.svg" download="paradox-logo-28.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-29">
+ <div class="stage">
+  <img src="svg/logo-29.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-29.png" download="paradox-logo-29.png">PNG</a><i>/</i><a href="svg/logo-29.svg" download="paradox-logo-29.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-30">
+ <div class="stage">
+  <img src="svg/logo-30.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-30.png" download="paradox-logo-30.png">PNG</a><i>/</i><a href="svg/logo-30.svg" download="paradox-logo-30.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-31">
+ <div class="stage">
+  <img src="svg/logo-31.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-31.png" download="paradox-logo-31.png">PNG</a><i>/</i><a href="svg/logo-31.svg" download="paradox-logo-31.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-32">
+ <div class="stage">
+  <img src="svg/logo-32.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-32.png" download="paradox-logo-32.png">PNG</a><i>/</i><a href="svg/logo-32.svg" download="paradox-logo-32.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-33">
+ <div class="stage">
+  <img src="svg/logo-33.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-33.png" download="paradox-logo-33.png">PNG</a><i>/</i><a href="svg/logo-33.svg" download="paradox-logo-33.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-34">
+ <div class="stage">
+  <img src="svg/logo-34.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-34.png" download="paradox-logo-34.png">PNG</a><i>/</i><a href="svg/logo-34.svg" download="paradox-logo-34.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-35">
+ <div class="stage">
+  <img src="svg/logo-35.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-35.png" download="paradox-logo-35.png">PNG</a><i>/</i><a href="svg/logo-35.svg" download="paradox-logo-35.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#594992" data-ink="light" data-id="logo-36">
+ <div class="stage">
+  <img src="svg/logo-36.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-36.png" download="paradox-logo-36.png">PNG</a><i>/</i><a href="svg/logo-36.svg" download="paradox-logo-36.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-37">
+ <div class="stage">
+  <img src="svg/logo-37.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-37.png" download="paradox-logo-37.png">PNG</a><i>/</i><a href="svg/logo-37.svg" download="paradox-logo-37.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-38">
+ <div class="stage">
+  <img src="svg/logo-38.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-38.png" download="paradox-logo-38.png">PNG</a><i>/</i><a href="svg/logo-38.svg" download="paradox-logo-38.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-39">
+ <div class="stage">
+  <img src="svg/logo-39.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-39.png" download="paradox-logo-39.png">PNG</a><i>/</i><a href="svg/logo-39.svg" download="paradox-logo-39.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-40">
+ <div class="stage">
+  <img src="svg/logo-40.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-40.png" download="paradox-logo-40.png">PNG</a><i>/</i><a href="svg/logo-40.svg" download="paradox-logo-40.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-41">
+ <div class="stage">
+  <img src="svg/logo-41.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-41.png" download="paradox-logo-41.png">PNG</a><i>/</i><a href="svg/logo-41.svg" download="paradox-logo-41.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-42">
+ <div class="stage">
+  <img src="svg/logo-42.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-42.png" download="paradox-logo-42.png">PNG</a><i>/</i><a href="svg/logo-42.svg" download="paradox-logo-42.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-43">
+ <div class="stage">
+  <img src="svg/logo-43.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-43.png" download="paradox-logo-43.png">PNG</a><i>/</i><a href="svg/logo-43.svg" download="paradox-logo-43.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-44">
+ <div class="stage">
+  <img src="svg/logo-44.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-44.png" download="paradox-logo-44.png">PNG</a><i>/</i><a href="svg/logo-44.svg" download="paradox-logo-44.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-45">
+ <div class="stage">
+  <img src="svg/logo-45.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-45.png" download="paradox-logo-45.png">PNG</a><i>/</i><a href="svg/logo-45.svg" download="paradox-logo-45.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-46">
+ <div class="stage">
+  <img src="svg/logo-46.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-46.png" download="paradox-logo-46.png">PNG</a><i>/</i><a href="svg/logo-46.svg" download="paradox-logo-46.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#452c7c" data-ink="light" data-id="logo-47">
+ <div class="stage">
+  <img src="svg/logo-47.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/logo-47.png" download="paradox-logo-47.png">PNG</a><i>/</i><a href="svg/logo-47.svg" download="paradox-logo-47.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#000000" data-ink="light" data-id="tm-01">
+ <div class="stage">
+  <img src="svg/tm-01.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/tm-01.png" download="paradox-tm-01.png">PNG</a><i>/</i><a href="svg/tm-01.svg" download="paradox-tm-01.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="tm-02">
+ <div class="stage">
+  <img src="svg/tm-02.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/tm-02.png" download="paradox-tm-02.png">PNG</a><i>/</i><a href="svg/tm-02.svg" download="paradox-tm-02.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="tm-03">
+ <div class="stage">
+  <img src="svg/tm-03.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/tm-03.png" download="paradox-tm-03.png">PNG</a><i>/</i><a href="svg/tm-03.svg" download="paradox-tm-03.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#ffffff" data-ink="dark" data-id="tm-04">
+ <div class="stage">
+  <img src="svg/tm-04.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/tm-04.png" download="paradox-tm-04.png">PNG</a><i>/</i><a href="svg/tm-04.svg" download="paradox-tm-04.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#000000" data-ink="light" data-id="tm-05">
+ <div class="stage">
+  <img src="svg/tm-05.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/tm-05.png" download="paradox-tm-05.png">PNG</a><i>/</i><a href="svg/tm-05.svg" download="paradox-tm-05.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#000000" data-ink="light" data-id="tm-06">
+ <div class="stage">
+  <img src="svg/tm-06.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/tm-06.png" download="paradox-tm-06.png">PNG</a><i>/</i><a href="svg/tm-06.svg" download="paradox-tm-06.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#000000" data-ink="light" data-id="tm-07">
+ <div class="stage">
+  <img src="svg/tm-07.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/tm-07.png" download="paradox-tm-07.png">PNG</a><i>/</i><a href="svg/tm-07.svg" download="paradox-tm-07.svg">SVG</a>
+  </div>
+ </div>
+</section>
+<section class="slide" data-bg="#000000" data-ink="light" data-id="tm-08">
+ <div class="stage">
+  <img src="svg/tm-08.svg" alt="" loading="lazy" decoding="async" width="1920" height="1080">
+  
+  <div class="ui">
+   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   </button>
+   <span class="sep"></span>
+   <a href="png/tm-08.png" download="paradox-tm-08.png">PNG</a><i>/</i><a href="svg/tm-08.svg" download="paradox-tm-08.svg">SVG</a>
+  </div>
+ </div>
+</section>
+</main>
+<script>
+const main=document.getElementById('main'), slides=[...document.querySelectorAll('.slide')],
+      root=document.documentElement, KEY='paradox-logo-picks';
+let cur=0, picks=new Set();
+try{ picks=new Set(JSON.parse(localStorage.getItem(KEY)||'[]')); }catch(e){}
+const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify([...picks])); }catch(e){} };
+slides.forEach(s=>{
+  const id=s.dataset.id, btn=s.querySelector('.pick');
+  const paint=()=>{ const on=picks.has(id); s.classList.toggle('picked',on); btn.setAttribute('aria-pressed',on); };
+  btn.addEventListener('click',()=>{ picks.has(id)?picks.delete(id):picks.add(id); save(); paint(); });
+  paint();
+});
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.intersectionRatio>0.2) e.target.classList.add('in');
+    if(e.intersectionRatio>0.55){
+      const i=slides.indexOf(e.target);
+      if(i!==cur){cur=i;root.style.setProperty('--bg',e.target.dataset.bg);}
+    }
+  });
+},{root:main,threshold:[0,.2,.55,.9]});
+slides.forEach(s=>io.observe(s));
+const go=i=>{i=Math.max(0,Math.min(slides.length-1,i));main.scrollTo({top:i*main.clientHeight,behavior:'smooth'});};
+addEventListener('keydown',e=>{
+  const k=e.key;
+  if(k==='ArrowDown'||k==='PageDown'||k==='j'||k===' '){e.preventDefault();go(cur+1);}
+  else if(k==='ArrowUp'||k==='PageUp'||k==='k'){e.preventDefault();go(cur-1);}
+  else if(k==='Home'){e.preventDefault();go(0);}
+  else if(k==='End'){e.preventDefault();go(slides.length-1);}
+  else if(k==='Enter'){e.preventDefault();slides[cur].querySelector('.pick').click();}
+});
+slides[0].classList.add('in');
+</script></body></html>
