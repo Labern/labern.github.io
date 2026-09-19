@@ -5,9 +5,11 @@
   "n": 1,
   "bg": "#000000",
   "text": "Logo Variations — Horizontal, Vertical, Japanese —",
-  "bw": 0.583,
-  "bh": 0.431,
-  "orient": "horizontal"
+  "bw": 0.5833,
+  "bh": 0.4301,
+  "orient": "horizontal",
+  "cx": 0.3546,
+  "cy": 0.3347
  },
  {
   "id": "logo-02.png",
@@ -15,9 +17,11 @@
   "n": 2,
   "bg": "#000000",
   "text": "★",
-  "bw": 0.047,
-  "bh": 0.079,
-  "orient": "square"
+  "bw": 0.0461,
+  "bh": 0.0778,
+  "orient": "square",
+  "cx": 0.0604,
+  "cy": 0.1109
  },
  {
   "id": "logo-03.png",
@@ -25,9 +29,11 @@
   "n": 3,
   "bg": "#000000",
   "text": "★★★★★ × PARADOX",
-  "bw": 0.552,
-  "bh": 0.088,
-  "orient": "horizontal"
+  "bw": 0.5503,
+  "bh": 0.087,
+  "orient": "horizontal",
+  "cx": 0.5003,
+  "cy": 0.5053
  },
  {
   "id": "logo-04.png",
@@ -35,9 +41,11 @@
   "n": 4,
   "bg": "#000000",
   "text": "★★★★★ × PARADOX",
-  "bw": 0.023,
-  "bh": 0.491,
-  "orient": "vertical"
+  "bw": 0.0245,
+  "bh": 0.4894,
+  "orient": "vertical",
+  "cx": 0.4983,
+  "cy": 0.5
  },
  {
   "id": "logo-05.png",
@@ -45,9 +53,11 @@
   "n": 5,
   "bg": "#000000",
   "text": "",
-  "bw": 0.031,
-  "bh": 0.782,
-  "orient": "vertical"
+  "bw": 0.0305,
+  "bh": 0.7819,
+  "orient": "vertical",
+  "cx": 0.5,
+  "cy": 0.5065
  },
  {
   "id": "logo-06.png",
@@ -55,9 +65,11 @@
   "n": 6,
   "bg": "#000000",
   "text": "",
-  "bw": 0.039,
-  "bh": 0.764,
-  "orient": "vertical"
+  "bw": 0.0349,
+  "bh": 0.7602,
+  "orient": "vertical",
+  "cx": 0.4999,
+  "cy": 0.4998
  },
  {
   "id": "logo-07.png",
@@ -65,9 +77,11 @@
   "n": 7,
   "bg": "#000000",
   "text": "★★★★★ × パラドックス",
-  "bw": 0.62,
-  "bh": 0.093,
-  "orient": "horizontal"
+  "bw": 0.6161,
+  "bh": 0.0907,
+  "orient": "horizontal",
+  "cx": 0.497,
+  "cy": 0.5053
  },
  {
   "id": "logo-08.png",
@@ -75,9 +89,11 @@
   "n": 8,
   "bg": "#000000",
   "text": "★★★★★ × パラドックス",
-  "bw": 0.026,
-  "bh": 0.551,
-  "orient": "vertical"
+  "bw": 0.0255,
+  "bh": 0.5486,
+  "orient": "vertical",
+  "cx": 0.498,
+  "cy": 0.4972
  },
  {
   "id": "logo-09.png",
@@ -85,9 +101,11 @@
   "n": 9,
   "bg": "#000000",
   "text": "★ ★ ★ ★ ★ × パ ラ ド ッ ク ス",
-  "bw": 0.026,
-  "bh": 0.741,
-  "orient": "vertical"
+  "bw": 0.0255,
+  "bh": 0.7431,
+  "orient": "vertical",
+  "cx": 0.4999,
+  "cy": 0.4935
  },
  {
   "id": "logo-10.png",
@@ -95,9 +113,11 @@
   "n": 10,
   "bg": "#000000",
   "text": "★ ★ ★ ★ ★ × パ ラ ド ッ ク ス",
-  "bw": 0.021,
-  "bh": 0.69,
-  "orient": "vertical"
+  "bw": 0.0203,
+  "bh": 0.688,
+  "orient": "vertical",
+  "cx": 0.4999,
+  "cy": 0.4947
  },
  {
   "id": "logo-11.png",
@@ -105,9 +125,11 @@
   "n": 11,
   "bg": "#000000",
   "text": "★ ★ ★ ★ ★ × パ ラ ド ッ ク ス",
-  "bw": 0.156,
-  "bh": 0.63,
-  "orient": "vertical"
+  "bw": 0.1573,
+  "bh": 0.6259,
+  "orient": "vertical",
+  "cx": 0.4999,
+  "cy": 0.4988
  },
  {
   "id": "logo-12.png",
@@ -115,9 +137,11 @@
   "n": 12,
   "bg": "#000000",
   "text": "★ ★ ★ ★ ★ パラドックス ×",
-  "bw": 0.312,
-  "bh": 0.338,
-  "orient": "horizontal"
+  "bw": 0.3141,
+  "bh": 0.3366,
+  "orient": "horizontal",
+  "cx": 0.4999,
+  "cy": 0.5093
  },
  {
   "id": "logo-13.png",
@@ -125,9 +149,11 @@
   "n": 13,
   "bg": "#ffffff",
   "text": "★",
-  "bw": 0.047,
-  "bh": 0.079,
-  "orient": "square"
+  "bw": 0.0464,
+  "bh": 0.0778,
+  "orient": "square",
+  "cx": 0.0605,
+  "cy": 0.1109
  },
  {
   "id": "logo-14.png",
@@ -135,9 +161,11 @@
   "n": 14,
   "bg": "#ffffff",
   "text": "★★★★★ × PARADOX",
-  "bw": 0.552,
-  "bh": 0.088,
-  "orient": "horizontal"
+  "bw": 0.5503,
+  "bh": 0.087,
+  "orient": "horizontal",
+  "cx": 0.5003,
+  "cy": 0.5053
  },
  {
   "id": "logo-15.png",
@@ -145,9 +173,11 @@
   "n": 15,
   "bg": "#ffffff",
   "text": "★★★★★ × PARADOX",
-  "bw": 0.026,
-  "bh": 0.491,
-  "orient": "vertical"
+  "bw": 0.0245,
+  "bh": 0.4894,
+  "orient": "vertical",
+  "cx": 0.4983,
+  "cy": 0.5
  },
  {
   "id": "logo-16.png",
@@ -155,9 +185,11 @@
   "n": 16,
   "bg": "#000000",
   "text": "",
-  "bw": 0.453,
-  "bh": 1.0,
-  "orient": "square"
+  "bw": 0.0305,
+  "bh": 0.7819,
+  "orient": "square",
+  "cx": 0.5,
+  "cy": 0.5065
  },
  {
   "id": "logo-17.png",
@@ -165,9 +197,11 @@
   "n": 17,
   "bg": "#000000",
   "text": "",
-  "bw": 0.039,
-  "bh": 0.764,
-  "orient": "vertical"
+  "bw": 0.0349,
+  "bh": 0.7602,
+  "orient": "vertical",
+  "cx": 0.4999,
+  "cy": 0.4998
  },
  {
   "id": "logo-18.png",
@@ -175,9 +209,11 @@
   "n": 18,
   "bg": "#ffffff",
   "text": "★★★★★ × パラドックス",
-  "bw": 0.62,
-  "bh": 0.093,
-  "orient": "horizontal"
+  "bw": 0.6161,
+  "bh": 0.0907,
+  "orient": "horizontal",
+  "cx": 0.497,
+  "cy": 0.5053
  },
  {
   "id": "logo-19.png",
@@ -185,9 +221,11 @@
   "n": 19,
   "bg": "#ffffff",
   "text": "★★★★★ × パラドックス",
-  "bw": 0.026,
-  "bh": 0.551,
-  "orient": "vertical"
+  "bw": 0.0255,
+  "bh": 0.5486,
+  "orient": "vertical",
+  "cx": 0.498,
+  "cy": 0.4972
  },
  {
   "id": "logo-20.png",
@@ -195,9 +233,11 @@
   "n": 20,
   "bg": "#ffffff",
   "text": "★ ★ ★ ★ ★ × パ ラ ド ッ ク ス",
-  "bw": 0.026,
-  "bh": 0.745,
-  "orient": "vertical"
+  "bw": 0.0255,
+  "bh": 0.7431,
+  "orient": "vertical",
+  "cx": 0.4999,
+  "cy": 0.4935
  },
  {
   "id": "logo-21.png",
@@ -205,9 +245,11 @@
   "n": 21,
   "bg": "#ffffff",
   "text": "★ ★ ★ ★ ★ × パ ラ ド ッ ク ス",
-  "bw": 0.021,
-  "bh": 0.69,
-  "orient": "vertical"
+  "bw": 0.0203,
+  "bh": 0.688,
+  "orient": "vertical",
+  "cx": 0.4999,
+  "cy": 0.4947
  },
  {
   "id": "logo-22.png",
@@ -215,9 +257,11 @@
   "n": 22,
   "bg": "#ffffff",
   "text": "★ ★ ★ ★ ★ × パ ラ ド ッ ク ス",
-  "bw": 0.156,
-  "bh": 0.63,
-  "orient": "vertical"
+  "bw": 0.1573,
+  "bh": 0.6259,
+  "orient": "vertical",
+  "cx": 0.4999,
+  "cy": 0.4988
  },
  {
   "id": "logo-23.png",
@@ -225,9 +269,11 @@
   "n": 23,
   "bg": "#ffffff",
   "text": "★ ★ ★ ★ ★ パラドックス ×",
-  "bw": 0.312,
-  "bh": 0.338,
-  "orient": "horizontal"
+  "bw": 0.3141,
+  "bh": 0.3366,
+  "orient": "horizontal",
+  "cx": 0.4999,
+  "cy": 0.5093
  },
  {
   "id": "logo-24.png",
@@ -235,9 +281,11 @@
   "n": 24,
   "bg": "#826ab6",
   "text": "★",
-  "bw": 0.047,
-  "bh": 0.079,
-  "orient": "square"
+  "bw": 0.0461,
+  "bh": 0.0773,
+  "orient": "square",
+  "cx": 0.0604,
+  "cy": 0.1106
  },
  {
   "id": "logo-25.png",
@@ -245,9 +293,11 @@
   "n": 25,
   "bg": "#826ab6",
   "text": "★★★★★ × パラドックス",
-  "bw": 0.615,
-  "bh": 0.093,
-  "orient": "horizontal"
+  "bw": 0.6161,
+  "bh": 0.0907,
+  "orient": "horizontal",
+  "cx": 0.497,
+  "cy": 0.5053
  },
  {
   "id": "logo-26.png",
@@ -255,9 +305,11 @@
   "n": 26,
   "bg": "#594992",
   "text": "★",
-  "bw": 0.047,
-  "bh": 0.079,
-  "orient": "square"
+  "bw": 0.0461,
+  "bh": 0.0778,
+  "orient": "square",
+  "cx": 0.0604,
+  "cy": 0.1109
  },
  {
   "id": "logo-27.png",
@@ -265,9 +317,11 @@
   "n": 27,
   "bg": "#594992",
   "text": "★★★★★ × パラドックス",
-  "bw": 0.617,
-  "bh": 0.093,
-  "orient": "horizontal"
+  "bw": 0.6161,
+  "bh": 0.0907,
+  "orient": "horizontal",
+  "cx": 0.497,
+  "cy": 0.5053
  },
  {
   "id": "logo-28.png",
@@ -275,9 +329,11 @@
   "n": 28,
   "bg": "#594992",
   "text": "★",
-  "bw": 0.047,
-  "bh": 0.079,
-  "orient": "square"
+  "bw": 0.0461,
+  "bh": 0.0773,
+  "orient": "square",
+  "cx": 0.0604,
+  "cy": 0.1106
  },
  {
   "id": "logo-29.png",
@@ -285,9 +341,11 @@
   "n": 29,
   "bg": "#594992",
   "text": "★★★★★ × PARADOX",
-  "bw": 0.549,
-  "bh": 0.088,
-  "orient": "horizontal"
+  "bw": 0.5503,
+  "bh": 0.087,
+  "orient": "horizontal",
+  "cx": 0.5003,
+  "cy": 0.5053
  },
  {
   "id": "logo-30.png",
@@ -295,9 +353,11 @@
   "n": 30,
   "bg": "#594992",
   "text": "★★★★★ × PARADOX",
-  "bw": 0.023,
-  "bh": 0.491,
-  "orient": "vertical"
+  "bw": 0.0245,
+  "bh": 0.4894,
+  "orient": "vertical",
+  "cx": 0.4983,
+  "cy": 0.5
  },
  {
   "id": "logo-31.png",
@@ -305,9 +365,11 @@
   "n": 31,
   "bg": "#594992",
   "text": "★★★★★ × パラドックス",
-  "bw": 0.617,
-  "bh": 0.093,
-  "orient": "horizontal"
+  "bw": 0.6161,
+  "bh": 0.0907,
+  "orient": "horizontal",
+  "cx": 0.497,
+  "cy": 0.5053
  },
  {
   "id": "logo-32.png",
@@ -315,9 +377,11 @@
   "n": 32,
   "bg": "#594992",
   "text": "★★★★★ × パラドックス",
-  "bw": 0.026,
-  "bh": 0.551,
-  "orient": "vertical"
+  "bw": 0.0255,
+  "bh": 0.5486,
+  "orient": "vertical",
+  "cx": 0.498,
+  "cy": 0.4972
  },
  {
   "id": "logo-33.png",
@@ -325,9 +389,11 @@
   "n": 33,
   "bg": "#594992",
   "text": "★ ★ ★ ★ ★ × パ ラ ド ッ ク ス",
-  "bw": 0.026,
-  "bh": 0.741,
-  "orient": "vertical"
+  "bw": 0.0255,
+  "bh": 0.7431,
+  "orient": "vertical",
+  "cx": 0.4999,
+  "cy": 0.4935
  },
  {
   "id": "logo-34.png",
@@ -335,9 +401,11 @@
   "n": 34,
   "bg": "#594992",
   "text": "★ ★ ★ ★ ★ × パ ラ ド ッ ク ス 34",
-  "bw": 0.021,
-  "bh": 0.796,
-  "orient": "vertical"
+  "bw": 0.0203,
+  "bh": 0.7986,
+  "orient": "vertical",
+  "cx": 0.4999,
+  "cy": 0.55
  },
  {
   "id": "logo-35.png",
@@ -345,9 +413,11 @@
   "n": 35,
   "bg": "#594992",
   "text": "★ ★ ★ ★ ★ × パ ラ ド ッ ク ス",
-  "bw": 0.156,
-  "bh": 0.63,
-  "orient": "vertical"
+  "bw": 0.1573,
+  "bh": 0.6259,
+  "orient": "vertical",
+  "cx": 0.4999,
+  "cy": 0.4988
  },
  {
   "id": "logo-36.png",
@@ -355,9 +425,11 @@
   "n": 36,
   "bg": "#594992",
   "text": "★ ★ ★ ★ ★ パラドックス ×",
-  "bw": 0.312,
-  "bh": 0.338,
-  "orient": "horizontal"
+  "bw": 0.3141,
+  "bh": 0.3366,
+  "orient": "horizontal",
+  "cx": 0.4999,
+  "cy": 0.5093
  },
  {
   "id": "logo-37.png",
@@ -365,9 +437,11 @@
   "n": 37,
   "bg": "#452c7c",
   "text": "★",
-  "bw": 0.047,
-  "bh": 0.079,
-  "orient": "square"
+  "bw": 0.0461,
+  "bh": 0.0778,
+  "orient": "square",
+  "cx": 0.0604,
+  "cy": 0.1109
  },
  {
   "id": "logo-38.png",
@@ -375,9 +449,11 @@
   "n": 38,
   "bg": "#452c7c",
   "text": "★★★★★ × パラドックス",
-  "bw": 0.62,
-  "bh": 0.093,
-  "orient": "horizontal"
+  "bw": 0.6161,
+  "bh": 0.0907,
+  "orient": "horizontal",
+  "cx": 0.497,
+  "cy": 0.5053
  },
  {
   "id": "logo-39.png",
@@ -385,9 +461,11 @@
   "n": 39,
   "bg": "#452c7c",
   "text": "★",
-  "bw": 0.047,
-  "bh": 0.079,
-  "orient": "square"
+  "bw": 0.0461,
+  "bh": 0.0778,
+  "orient": "square",
+  "cx": 0.0604,
+  "cy": 0.1109
  },
  {
   "id": "logo-40.png",
@@ -395,9 +473,11 @@
   "n": 40,
   "bg": "#452c7c",
   "text": "★★★★★ × PARADOX",
-  "bw": 0.552,
-  "bh": 0.088,
-  "orient": "horizontal"
+  "bw": 0.5503,
+  "bh": 0.087,
+  "orient": "horizontal",
+  "cx": 0.5003,
+  "cy": 0.5053
  },
  {
   "id": "logo-41.png",
@@ -405,9 +485,11 @@
   "n": 41,
   "bg": "#452c7c",
   "text": "★★★★★ × PARADOX",
-  "bw": 0.023,
-  "bh": 0.491,
-  "orient": "vertical"
+  "bw": 0.0245,
+  "bh": 0.4894,
+  "orient": "vertical",
+  "cx": 0.4983,
+  "cy": 0.5
  },
  {
   "id": "logo-42.png",
@@ -415,9 +497,11 @@
   "n": 42,
   "bg": "#452c7c",
   "text": "★★★★★ × パラドックス",
-  "bw": 0.62,
-  "bh": 0.093,
-  "orient": "horizontal"
+  "bw": 0.6161,
+  "bh": 0.0907,
+  "orient": "horizontal",
+  "cx": 0.497,
+  "cy": 0.5053
  },
  {
   "id": "logo-43.png",
@@ -425,9 +509,11 @@
   "n": 43,
   "bg": "#452c7c",
   "text": "★★★★★ × パラドックス",
-  "bw": 0.026,
-  "bh": 0.551,
-  "orient": "vertical"
+  "bw": 0.0255,
+  "bh": 0.5486,
+  "orient": "vertical",
+  "cx": 0.498,
+  "cy": 0.4972
  },
  {
   "id": "logo-44.png",
@@ -435,9 +521,11 @@
   "n": 44,
   "bg": "#452c7c",
   "text": "★ ★ ★ ★ ★ × パ ラ ド ッ ク ス",
-  "bw": 0.026,
-  "bh": 0.741,
-  "orient": "vertical"
+  "bw": 0.0255,
+  "bh": 0.7431,
+  "orient": "vertical",
+  "cx": 0.4999,
+  "cy": 0.4935
  },
  {
   "id": "logo-45.png",
@@ -445,9 +533,11 @@
   "n": 45,
   "bg": "#452c7c",
   "text": "★ ★ ★ ★ ★ × パ ラ ド ッ ク ス",
-  "bw": 0.021,
-  "bh": 0.69,
-  "orient": "vertical"
+  "bw": 0.0203,
+  "bh": 0.688,
+  "orient": "vertical",
+  "cx": 0.4999,
+  "cy": 0.4947
  },
  {
   "id": "logo-46.png",
@@ -455,9 +545,11 @@
   "n": 46,
   "bg": "#452c7c",
   "text": "★ ★ ★ ★ ★ × パ ラ ド ッ ク ス",
-  "bw": 0.156,
-  "bh": 0.63,
-  "orient": "vertical"
+  "bw": 0.1573,
+  "bh": 0.6259,
+  "orient": "vertical",
+  "cx": 0.4999,
+  "cy": 0.4988
  },
  {
   "id": "logo-47.png",
@@ -465,9 +557,11 @@
   "n": 47,
   "bg": "#452c7c",
   "text": "★ ★ ★ ★ ★ パラドックス ×",
-  "bw": 0.312,
-  "bh": 0.338,
-  "orient": "horizontal"
+  "bw": 0.3141,
+  "bh": 0.3366,
+  "orient": "horizontal",
+  "cx": 0.4999,
+  "cy": 0.5093
  },
  {
   "id": "tm-01.png",
@@ -475,9 +569,11 @@
   "n": 1,
   "bg": "#000000",
   "text": "Trademark and copyright placement",
-  "bw": 0.482,
-  "bh": 0.236,
-  "orient": "horizontal"
+  "bw": 0.4818,
+  "bh": 0.2301,
+  "orient": "horizontal",
+  "cx": 0.515,
+  "cy": 0.4509
  },
  {
   "id": "tm-02.png",
@@ -485,9 +581,11 @@
   "n": 2,
   "bg": "#ffffff",
   "text": "",
-  "bw": 0.406,
-  "bh": 0.227,
-  "orient": "horizontal"
+  "bw": 0.4005,
+  "bh": 0.2218,
+  "orient": "horizontal",
+  "cx": 0.4996,
+  "cy": 0.5023
  },
  {
   "id": "tm-03.png",
@@ -495,9 +593,11 @@
   "n": 3,
   "bg": "#ffffff",
   "text": "TM",
-  "bw": 0.435,
-  "bh": 0.227,
-  "orient": "horizontal"
+  "bw": 0.4328,
+  "bh": 0.2218,
+  "orient": "horizontal",
+  "cx": 0.5158,
+  "cy": 0.5023
  },
  {
   "id": "tm-04.png",
@@ -505,9 +605,11 @@
   "n": 4,
   "bg": "#ffffff",
   "text": "®",
-  "bw": 0.432,
-  "bh": 0.227,
-  "orient": "horizontal"
+  "bw": 0.4297,
+  "bh": 0.2218,
+  "orient": "horizontal",
+  "cx": 0.5142,
+  "cy": 0.5023
  },
  {
   "id": "tm-05.png",
@@ -515,9 +617,11 @@
   "n": 5,
   "bg": "#000000",
   "text": "® TM",
-  "bw": 0.042,
-  "bh": 0.819,
-  "orient": "vertical"
+  "bw": 0.0396,
+  "bh": 0.8139,
+  "orient": "vertical",
+  "cx": 0.5022,
+  "cy": 0.5266
  },
  {
   "id": "tm-06.png",
@@ -525,9 +629,11 @@
   "n": 6,
   "bg": "#000000",
   "text": "® ®",
-  "bw": 0.042,
-  "bh": 0.81,
-  "orient": "vertical"
+  "bw": 0.0398,
+  "bh": 0.8023,
+  "orient": "vertical",
+  "cx": 0.5023,
+  "cy": 0.5208
  },
  {
   "id": "tm-07.png",
@@ -535,9 +641,11 @@
   "n": 7,
   "bg": "#000000",
   "text": "® TM",
-  "bw": 0.06,
-  "bh": 0.778,
-  "orient": "vertical"
+  "bw": 0.0583,
+  "bh": 0.7722,
+  "orient": "vertical",
+  "cx": 0.5145,
+  "cy": 0.5178
  },
  {
   "id": "tm-08.png",
@@ -545,8 +653,10 @@
   "n": 8,
   "bg": "#000000",
   "text": "® ®",
-  "bw": 0.055,
-  "bh": 0.773,
-  "orient": "vertical"
+  "bw": 0.0518,
+  "bh": 0.7699,
+  "orient": "vertical",
+  "cx": 0.5112,
+  "cy": 0.5167
  }
 ]
