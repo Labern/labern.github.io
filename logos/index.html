@@ -22,12 +22,34 @@ main::-webkit-scrollbar{display:none}
 .stage img{width:100%;height:100%;display:block}
 .ui{
   position:absolute; right:clamp(14px,2.2vw,34px); bottom:clamp(12px,2.2vw,28px);
-  display:flex; align-items:center; gap:10px; z-index:3; color:var(--ui);
+  display:flex; flex-direction:column; align-items:flex-end; gap:11px; z-index:3; color:var(--ui);
   font:400 10px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace; letter-spacing:.2em;
   opacity:0; transform:translateY(4px);
   transition:opacity .45s var(--ease), transform .45s var(--ease);
 }
-[data-ink="dark"] .ui,[data-ink="dark"] .legend{--ui:#000000}
+.acts{display:flex;align-items:center;gap:10px}
+.top{
+  display:grid;place-items:center;width:17px;height:17px;padding:0;border:0;background:none;
+  color:var(--ui);opacity:.38;cursor:pointer;transition:opacity .25s,transform .25s var(--ease);
+}
+.top svg{width:15px;height:15px;display:block}
+.top:hover{opacity:.85;transform:translateY(-1px)}
+.dots{display:flex;align-items:center;gap:7px}
+.dot{
+  width:10px;height:10px;padding:0;border-radius:50%;cursor:pointer;box-sizing:border-box;
+  background:var(--d); color:var(--ui); border:1px solid currentColor; opacity:.62;
+  transition:opacity .25s,transform .25s var(--ease),box-shadow .25s;
+}
+.dot:hover{opacity:.92}
+.dot.on{opacity:1;transform:scale(1.28);box-shadow:0 0 0 2.5px color-mix(in srgb, currentColor 22%, transparent)}
+/* the first slide shows the controls outright, a size up — that is the explanation */
+.slide.first .ui{opacity:1;transform:none;font-size:13px;gap:14px}
+.slide.first .pick,.slide.first .top{width:22px;height:22px}
+.slide.first .pick svg,.slide.first .top svg{width:19px;height:19px}
+.slide.first .dot{width:12px;height:12px}
+.slide.first .sep{height:14px}
+.slide.first .top{display:none}  /* nothing above the first slide */
+[data-ink="dark"] .ui,[data-ink="dark"] .intro{--ui:#000000}
 :root[data-ink="dark"]{--ui:#000000}
 :root{--ui:#ffffff}
 .hot{position:absolute;top:0;right:0;bottom:0;width:clamp(120px,18%,300px);z-index:2}
@@ -39,14 +61,6 @@ main::-webkit-scrollbar{display:none}
   position:absolute; left:clamp(14px,2.2vw,34px); bottom:clamp(12px,2.2vw,28px); z-index:3;
   display:flex; flex-direction:column; align-items:flex-start; gap:16px;
 }
-.legend{
-  color:var(--ui); opacity:.45;
-  font:400 10px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace; letter-spacing:.16em; text-transform:uppercase;
-}
-.legend p{display:flex;align-items:baseline;gap:12px;margin-bottom:9px}
-.legend p:last-child{margin-bottom:0}
-.legend b{font-weight:400;min-width:30px;opacity:.9}
-.legend span{opacity:.62}
 #send{
   position:fixed; left:0; right:0; top:clamp(12px,2.2vw,28px);
   transform:translateY(-6px);
@@ -95,15 +109,14 @@ main::-webkit-scrollbar{display:none}
   .slide .ui,.slide .intro{display:none}
   .slide.current .ui{
     display:flex; position:fixed; right:13px; bottom:13px; left:auto; top:auto;
-    opacity:.6; transform:none; z-index:7; gap:12px;
+    opacity:.75; transform:none; z-index:7; gap:13px;
   }
+  .slide.first.current .ui{font-size:12px}
+  .dot{width:11px;height:11px}
+  .slide.first .dot{width:13px;height:13px}
   .slide.current .intro{
     display:flex; position:fixed; left:13px; top:13px; bottom:auto; max-width:72vw; gap:11px; z-index:7;
   }
-  .legend p:nth-child(4){display:none}
-  .legend{font-size:8.5px;letter-spacing:.12em}
-  .legend p{gap:9px;margin-bottom:7px}
-  .legend b{min-width:24px}
   .jump{padding:8px 10px;font-size:8.5px}
   .pick{width:22px;height:22px}
   #send{top:auto;bottom:48px;left:auto;right:13px;justify-content:flex-end;transform:translateY(4px)}
@@ -114,23 +127,27 @@ main::-webkit-scrollbar{display:none}
 @media (prefers-reduced-motion:reduce){.stage{opacity:1!important;transform:none!important;transition:none}}
 </style></head><body>
 <main id="main">
-<section class="slide" id="logo-01" data-bg="#000000" data-ink="light" data-id="logo-01" style="--bw:0.5833;--bh:0.4301;--cx:0.3546;--cy:0.3347">
+<section class="slide first" id="logo-01" data-bg="#000000" data-ink="light" data-id="logo-01" style="--bw:0.5833;--bh:0.4301;--cx:0.3546;--cy:0.3347">
  <div class="stage">
   <img src="svg/logo-01.svg?v=b651291e" alt="" decoding="async" width="1920" height="1080">
-    <div class="intro"><div class="legend">
-   <p><b>&#10003;</b><span>mark the ones you like &mdash; then send them to me</span></p>
-   <p><b>PNG</b><span>download &mdash; 3840 &times; 2160 raster</span></p>
-   <p><b>SVG</b><span>download &mdash; vector, scales forever</span></p>
-   <p><b>&rarr;</b><span>controls appear at the right edge of any slide</span></p>
-  </div>
-  <a class="jump" href="/logo-experiments">LOGO EXPERIMENTS &#8594;</a></div>
+    <div class="intro"><a class="jump" href="/logo-experiments">LOGO EXPERIMENTS &#8594;</a></div>
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-01.png?v=ab717e8e" download="paradox-logo-01.png">PNG</a><i>/</i><a href="svg/logo-01.svg?v=b651291e" download="paradox-logo-01.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-01.png?v=ab717e8e" download="paradox-logo-01.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-01.svg?v=b651291e" download="paradox-logo-01.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -140,11 +157,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-02.png?v=78ac272b" download="paradox-logo-02.png">PNG</a><i>/</i><a href="svg/logo-02.svg?v=2c84a4d7" download="paradox-logo-02.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-02.png?v=78ac272b" download="paradox-logo-02.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-02.svg?v=2c84a4d7" download="paradox-logo-02.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -154,11 +181,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-03.png?v=ff1f5fec" download="paradox-logo-03.png">PNG</a><i>/</i><a href="svg/logo-03.svg?v=e3956721" download="paradox-logo-03.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-03.png?v=ff1f5fec" download="paradox-logo-03.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-03.svg?v=e3956721" download="paradox-logo-03.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -168,11 +205,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-04.png?v=2d2ba2b7" download="paradox-logo-04.png">PNG</a><i>/</i><a href="svg/logo-04.svg?v=54a03b3f" download="paradox-logo-04.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-04.png?v=2d2ba2b7" download="paradox-logo-04.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-04.svg?v=54a03b3f" download="paradox-logo-04.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -182,11 +229,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-05.png?v=7f9c89fa" download="paradox-logo-05.png">PNG</a><i>/</i><a href="svg/logo-05.svg?v=6a2e8952" download="paradox-logo-05.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-05.png?v=7f9c89fa" download="paradox-logo-05.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-05.svg?v=6a2e8952" download="paradox-logo-05.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -196,11 +253,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-06.png?v=87ea2037" download="paradox-logo-06.png">PNG</a><i>/</i><a href="svg/logo-06.svg?v=0e1f9ba8" download="paradox-logo-06.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-06.png?v=87ea2037" download="paradox-logo-06.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-06.svg?v=0e1f9ba8" download="paradox-logo-06.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -210,11 +277,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-07.png?v=c5a8ef7e" download="paradox-logo-07.png">PNG</a><i>/</i><a href="svg/logo-07.svg?v=95a02151" download="paradox-logo-07.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-07.png?v=c5a8ef7e" download="paradox-logo-07.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-07.svg?v=95a02151" download="paradox-logo-07.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -224,11 +301,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-08.png?v=564958b6" download="paradox-logo-08.png">PNG</a><i>/</i><a href="svg/logo-08.svg?v=8a2425b3" download="paradox-logo-08.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-08.png?v=564958b6" download="paradox-logo-08.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-08.svg?v=8a2425b3" download="paradox-logo-08.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -238,11 +325,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-09.png?v=00370aa4" download="paradox-logo-09.png">PNG</a><i>/</i><a href="svg/logo-09.svg?v=908345e8" download="paradox-logo-09.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-09.png?v=00370aa4" download="paradox-logo-09.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-09.svg?v=908345e8" download="paradox-logo-09.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -252,11 +349,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-10.png?v=12124f14" download="paradox-logo-10.png">PNG</a><i>/</i><a href="svg/logo-10.svg?v=ee3fb86e" download="paradox-logo-10.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-10.png?v=12124f14" download="paradox-logo-10.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-10.svg?v=ee3fb86e" download="paradox-logo-10.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -266,11 +373,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-11.png?v=01531d12" download="paradox-logo-11.png">PNG</a><i>/</i><a href="svg/logo-11.svg?v=fac5c736" download="paradox-logo-11.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-11.png?v=01531d12" download="paradox-logo-11.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-11.svg?v=fac5c736" download="paradox-logo-11.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -280,11 +397,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-12.png?v=c4cfc888" download="paradox-logo-12.png">PNG</a><i>/</i><a href="svg/logo-12.svg?v=f49eea17" download="paradox-logo-12.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-12.png?v=c4cfc888" download="paradox-logo-12.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-12.svg?v=f49eea17" download="paradox-logo-12.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -294,11 +421,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-13.png?v=bf4c8707" download="paradox-logo-13.png">PNG</a><i>/</i><a href="svg/logo-13.svg?v=88b79c74" download="paradox-logo-13.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-13.png?v=bf4c8707" download="paradox-logo-13.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-13.svg?v=88b79c74" download="paradox-logo-13.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -308,11 +445,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-14.png?v=60ef2ceb" download="paradox-logo-14.png">PNG</a><i>/</i><a href="svg/logo-14.svg?v=e5e75793" download="paradox-logo-14.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-14.png?v=60ef2ceb" download="paradox-logo-14.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-14.svg?v=e5e75793" download="paradox-logo-14.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -322,11 +469,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-15.png?v=c3f58d02" download="paradox-logo-15.png">PNG</a><i>/</i><a href="svg/logo-15.svg?v=8257cde8" download="paradox-logo-15.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-15.png?v=c3f58d02" download="paradox-logo-15.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-15.svg?v=8257cde8" download="paradox-logo-15.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -336,11 +493,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-16.png?v=7f9c89fa" download="paradox-logo-16.png">PNG</a><i>/</i><a href="svg/logo-16.svg?v=0706dd32" download="paradox-logo-16.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-16.png?v=7f9c89fa" download="paradox-logo-16.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-16.svg?v=0706dd32" download="paradox-logo-16.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -350,11 +517,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-17.png?v=87ea2037" download="paradox-logo-17.png">PNG</a><i>/</i><a href="svg/logo-17.svg?v=180172c9" download="paradox-logo-17.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-17.png?v=87ea2037" download="paradox-logo-17.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-17.svg?v=180172c9" download="paradox-logo-17.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -364,11 +541,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-18.png?v=5e9f0b73" download="paradox-logo-18.png">PNG</a><i>/</i><a href="svg/logo-18.svg?v=f0d9708b" download="paradox-logo-18.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-18.png?v=5e9f0b73" download="paradox-logo-18.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-18.svg?v=f0d9708b" download="paradox-logo-18.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -378,11 +565,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-19.png?v=70be616c" download="paradox-logo-19.png">PNG</a><i>/</i><a href="svg/logo-19.svg?v=73b210f7" download="paradox-logo-19.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-19.png?v=70be616c" download="paradox-logo-19.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-19.svg?v=73b210f7" download="paradox-logo-19.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -392,11 +589,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-20.png?v=2ec6a942" download="paradox-logo-20.png">PNG</a><i>/</i><a href="svg/logo-20.svg?v=3e5c4e1a" download="paradox-logo-20.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-20.png?v=2ec6a942" download="paradox-logo-20.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-20.svg?v=3e5c4e1a" download="paradox-logo-20.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -406,11 +613,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-21.png?v=bb2d14ab" download="paradox-logo-21.png">PNG</a><i>/</i><a href="svg/logo-21.svg?v=07b0a52e" download="paradox-logo-21.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-21.png?v=bb2d14ab" download="paradox-logo-21.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-21.svg?v=07b0a52e" download="paradox-logo-21.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -420,11 +637,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-22.png?v=a125f00a" download="paradox-logo-22.png">PNG</a><i>/</i><a href="svg/logo-22.svg?v=be2898df" download="paradox-logo-22.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-22.png?v=a125f00a" download="paradox-logo-22.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-22.svg?v=be2898df" download="paradox-logo-22.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -434,11 +661,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-23.png?v=aa4ad37e" download="paradox-logo-23.png">PNG</a><i>/</i><a href="svg/logo-23.svg?v=d3fcf17a" download="paradox-logo-23.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-23.png?v=aa4ad37e" download="paradox-logo-23.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-23.svg?v=d3fcf17a" download="paradox-logo-23.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -448,11 +685,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-24.png?v=2e5fc055" download="paradox-logo-24.png">PNG</a><i>/</i><a href="svg/logo-24.svg?v=837ddd04" download="paradox-logo-24.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-24.png?v=2e5fc055" download="paradox-logo-24.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-24.svg?v=837ddd04" download="paradox-logo-24.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -462,11 +709,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-25.png?v=d36df56e" download="paradox-logo-25.png">PNG</a><i>/</i><a href="svg/logo-25.svg?v=e5db6a46" download="paradox-logo-25.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-25.png?v=d36df56e" download="paradox-logo-25.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-25.svg?v=e5db6a46" download="paradox-logo-25.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -476,11 +733,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-26.png?v=cf632049" download="paradox-logo-26.png">PNG</a><i>/</i><a href="svg/logo-26.svg?v=0138a88c" download="paradox-logo-26.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-26.png?v=cf632049" download="paradox-logo-26.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-26.svg?v=0138a88c" download="paradox-logo-26.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -490,11 +757,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-27.png?v=c46aafd7" download="paradox-logo-27.png">PNG</a><i>/</i><a href="svg/logo-27.svg?v=f1ef878c" download="paradox-logo-27.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-27.png?v=c46aafd7" download="paradox-logo-27.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-27.svg?v=f1ef878c" download="paradox-logo-27.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -504,11 +781,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-28.png?v=7736fa2f" download="paradox-logo-28.png">PNG</a><i>/</i><a href="svg/logo-28.svg?v=86e94662" download="paradox-logo-28.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-28.png?v=7736fa2f" download="paradox-logo-28.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-28.svg?v=86e94662" download="paradox-logo-28.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -518,11 +805,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-29.png?v=c973f4bb" download="paradox-logo-29.png">PNG</a><i>/</i><a href="svg/logo-29.svg?v=79ea29e4" download="paradox-logo-29.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-29.png?v=c973f4bb" download="paradox-logo-29.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-29.svg?v=79ea29e4" download="paradox-logo-29.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -532,11 +829,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-30.png?v=beb11e11" download="paradox-logo-30.png">PNG</a><i>/</i><a href="svg/logo-30.svg?v=b5e61392" download="paradox-logo-30.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-30.png?v=beb11e11" download="paradox-logo-30.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-30.svg?v=b5e61392" download="paradox-logo-30.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -546,11 +853,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-31.png?v=c46aafd7" download="paradox-logo-31.png">PNG</a><i>/</i><a href="svg/logo-31.svg?v=f1ef878c" download="paradox-logo-31.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-31.png?v=c46aafd7" download="paradox-logo-31.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-31.svg?v=f1ef878c" download="paradox-logo-31.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -560,11 +877,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-32.png?v=48b62e71" download="paradox-logo-32.png">PNG</a><i>/</i><a href="svg/logo-32.svg?v=dd061598" download="paradox-logo-32.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-32.png?v=48b62e71" download="paradox-logo-32.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-32.svg?v=dd061598" download="paradox-logo-32.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -574,11 +901,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-33.png?v=f90f1ff6" download="paradox-logo-33.png">PNG</a><i>/</i><a href="svg/logo-33.svg?v=dc7b587c" download="paradox-logo-33.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-33.png?v=f90f1ff6" download="paradox-logo-33.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-33.svg?v=dc7b587c" download="paradox-logo-33.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -588,11 +925,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-34.png?v=07520cc7" download="paradox-logo-34.png">PNG</a><i>/</i><a href="svg/logo-34.svg?v=30610dc7" download="paradox-logo-34.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-34.png?v=07520cc7" download="paradox-logo-34.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-34.svg?v=30610dc7" download="paradox-logo-34.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -602,11 +949,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-35.png?v=1cccde71" download="paradox-logo-35.png">PNG</a><i>/</i><a href="svg/logo-35.svg?v=bb37424a" download="paradox-logo-35.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-35.png?v=1cccde71" download="paradox-logo-35.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-35.svg?v=bb37424a" download="paradox-logo-35.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -616,11 +973,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-36.png?v=21a5a876" download="paradox-logo-36.png">PNG</a><i>/</i><a href="svg/logo-36.svg?v=12f3cbac" download="paradox-logo-36.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-36.png?v=21a5a876" download="paradox-logo-36.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-36.svg?v=12f3cbac" download="paradox-logo-36.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -630,11 +997,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-37.png?v=c3af6769" download="paradox-logo-37.png">PNG</a><i>/</i><a href="svg/logo-37.svg?v=001f025c" download="paradox-logo-37.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-37.png?v=c3af6769" download="paradox-logo-37.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-37.svg?v=001f025c" download="paradox-logo-37.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -644,11 +1021,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-38.png?v=14f5647e" download="paradox-logo-38.png">PNG</a><i>/</i><a href="svg/logo-38.svg?v=db7a8c7e" download="paradox-logo-38.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-38.png?v=14f5647e" download="paradox-logo-38.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-38.svg?v=db7a8c7e" download="paradox-logo-38.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -658,11 +1045,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-39.png?v=c3af6769" download="paradox-logo-39.png">PNG</a><i>/</i><a href="svg/logo-39.svg?v=001f025c" download="paradox-logo-39.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-39.png?v=c3af6769" download="paradox-logo-39.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-39.svg?v=001f025c" download="paradox-logo-39.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -672,11 +1069,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-40.png?v=c9b4b85b" download="paradox-logo-40.png">PNG</a><i>/</i><a href="svg/logo-40.svg?v=91558742" download="paradox-logo-40.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-40.png?v=c9b4b85b" download="paradox-logo-40.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-40.svg?v=91558742" download="paradox-logo-40.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -686,11 +1093,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-41.png?v=c1035e49" download="paradox-logo-41.png">PNG</a><i>/</i><a href="svg/logo-41.svg?v=9457a000" download="paradox-logo-41.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-41.png?v=c1035e49" download="paradox-logo-41.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-41.svg?v=9457a000" download="paradox-logo-41.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -700,11 +1117,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-42.png?v=14f5647e" download="paradox-logo-42.png">PNG</a><i>/</i><a href="svg/logo-42.svg?v=db7a8c7e" download="paradox-logo-42.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-42.png?v=14f5647e" download="paradox-logo-42.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-42.svg?v=db7a8c7e" download="paradox-logo-42.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -714,11 +1141,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-43.png?v=93b0cf98" download="paradox-logo-43.png">PNG</a><i>/</i><a href="svg/logo-43.svg?v=094d7f22" download="paradox-logo-43.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-43.png?v=93b0cf98" download="paradox-logo-43.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-43.svg?v=094d7f22" download="paradox-logo-43.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -728,11 +1165,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-44.png?v=0988bc43" download="paradox-logo-44.png">PNG</a><i>/</i><a href="svg/logo-44.svg?v=f165788c" download="paradox-logo-44.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-44.png?v=0988bc43" download="paradox-logo-44.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-44.svg?v=f165788c" download="paradox-logo-44.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -742,11 +1189,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-45.png?v=917bbfdf" download="paradox-logo-45.png">PNG</a><i>/</i><a href="svg/logo-45.svg?v=03e62950" download="paradox-logo-45.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-45.png?v=917bbfdf" download="paradox-logo-45.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-45.svg?v=03e62950" download="paradox-logo-45.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -756,11 +1213,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-46.png?v=e1b58339" download="paradox-logo-46.png">PNG</a><i>/</i><a href="svg/logo-46.svg?v=e7e6b46c" download="paradox-logo-46.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-46.png?v=e1b58339" download="paradox-logo-46.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-46.svg?v=e7e6b46c" download="paradox-logo-46.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -770,11 +1237,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/logo-47.png?v=7aeb8283" download="paradox-logo-47.png">PNG</a><i>/</i><a href="svg/logo-47.svg?v=aa34bd4d" download="paradox-logo-47.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/logo-47.png?v=7aeb8283" download="paradox-logo-47.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/logo-47.svg?v=aa34bd4d" download="paradox-logo-47.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -784,11 +1261,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/tm-01.png?v=028646f4" download="paradox-tm-01.png">PNG</a><i>/</i><a href="svg/tm-01.svg?v=ae30af5c" download="paradox-tm-01.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/tm-01.png?v=028646f4" download="paradox-tm-01.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/tm-01.svg?v=ae30af5c" download="paradox-tm-01.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -798,11 +1285,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/tm-02.png?v=d2629fec" download="paradox-tm-02.png">PNG</a><i>/</i><a href="svg/tm-02.svg?v=c58bc21c" download="paradox-tm-02.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/tm-02.png?v=d2629fec" download="paradox-tm-02.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/tm-02.svg?v=c58bc21c" download="paradox-tm-02.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -812,11 +1309,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/tm-03.png?v=7479994f" download="paradox-tm-03.png">PNG</a><i>/</i><a href="svg/tm-03.svg?v=34cd22fd" download="paradox-tm-03.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/tm-03.png?v=7479994f" download="paradox-tm-03.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/tm-03.svg?v=34cd22fd" download="paradox-tm-03.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -826,11 +1333,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/tm-04.png?v=0d0549e4" download="paradox-tm-04.png">PNG</a><i>/</i><a href="svg/tm-04.svg?v=53a2938b" download="paradox-tm-04.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/tm-04.png?v=0d0549e4" download="paradox-tm-04.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/tm-04.svg?v=53a2938b" download="paradox-tm-04.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -840,11 +1357,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/tm-05.png?v=e25cd61a" download="paradox-tm-05.png">PNG</a><i>/</i><a href="svg/tm-05.svg?v=2b11fa18" download="paradox-tm-05.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/tm-05.png?v=e25cd61a" download="paradox-tm-05.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/tm-05.svg?v=2b11fa18" download="paradox-tm-05.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -854,11 +1381,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/tm-06.png?v=58281490" download="paradox-tm-06.png">PNG</a><i>/</i><a href="svg/tm-06.svg?v=f55ebf13" download="paradox-tm-06.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/tm-06.png?v=58281490" download="paradox-tm-06.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/tm-06.svg?v=f55ebf13" download="paradox-tm-06.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -868,11 +1405,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/tm-07.png?v=fcb99ebd" download="paradox-tm-07.png">PNG</a><i>/</i><a href="svg/tm-07.svg?v=571a9713" download="paradox-tm-07.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/tm-07.png?v=fcb99ebd" download="paradox-tm-07.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/tm-07.svg?v=571a9713" download="paradox-tm-07.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -882,11 +1429,21 @@ main::-webkit-scrollbar{display:none}
   
   <div class="hot" aria-hidden="true"></div>
   <div class="ui">
-   <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
-     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+   <button class="top" type="button" aria-label="Back to the first slide" title="Back to the top">
+     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 10.4 8 5.6 12.8 10.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
    </button>
-   <span class="sep"></span>
-   <a href="png/tm-08.png?v=87494eff" download="paradox-tm-08.png">PNG</a><i>/</i><a href="svg/tm-08.svg?v=e2a09cd4" download="paradox-tm-08.svg">SVG</a>
+   <div class="dots">
+     <button class="dot" data-sect="k" style="--d:#000000" type="button" aria-label="Black section"></button>
+     <button class="dot" data-sect="w" style="--d:#ffffff" type="button" aria-label="White section"></button>
+     <button class="dot" data-sect="p" style="--d:#594992" type="button" aria-label="Purple section"></button>
+   </div>
+   <div class="acts">
+    <button class="pick" type="button" aria-pressed="false" aria-label="Pick this variation" title="Pick this one">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.6 6.2 12.3 13.5 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+    </button>
+    <span class="sep"></span>
+    <a href="png/tm-08.png?v=87494eff" download="paradox-tm-08.png" title="Download 3840 x 2160 PNG">PNG</a><i>/</i><a href="svg/tm-08.svg?v=e2a09cd4" download="paradox-tm-08.svg" title="Download vector SVG">SVG</a>
+   </div>
   </div>
  </div>
 </section>
@@ -905,6 +1462,22 @@ slides.forEach(s=>{
   paint();
 });
 const NL=String.fromCharCode(10);
+// three unlabelled dots jump to the black / white / purple runs
+const kind=bg=> bg==='#000000' ? 'k' : bg==='#ffffff' ? 'w' : 'p';
+const sectionOf=slides.map(s=>kind(s.dataset.bg));
+const firstOf={};
+sectionOf.forEach((k,i)=>{ if(firstOf[k]===undefined) firstOf[k]=i; });
+slides.forEach(s=>{
+  s.querySelector('.top').addEventListener('click',()=>jump(0));
+  s.querySelectorAll('.dot').forEach(d=>{
+    const t=firstOf[d.dataset.sect];
+    if(t===undefined) d.remove(); else d.addEventListener('click',()=>jump(t));
+  });
+});
+function paintDots(i){
+  const k=sectionOf[i];
+  slides[i].querySelectorAll('.dot').forEach(d=>d.classList.toggle('on',d.dataset.sect===k));
+}
 const sendEl=document.getElementById('send'), nEl=document.getElementById('n');
 const order=slides.map(s=>s.dataset.id);
 const chosen=()=>order.filter(id=>picks.has(id));
@@ -941,12 +1514,19 @@ function settle(){
   root.dataset.ink=s.dataset.ink;
   slides.forEach((v,j)=>v.classList.toggle('current',j===i));
   s.classList.add('in');
+  paintDots(i);
   if(slides[i+1]) slides[i+1].classList.add('in');
   if(slides[i-1]) slides[i-1].classList.add('in');
 }
 main.addEventListener('scroll',settle,{passive:true});
 addEventListener('resize',settle);
 const go=i=>{i=Math.max(0,Math.min(slides.length-1,i));main.scrollTo({top:i*main.clientHeight,behavior:'smooth'});};
+// section jumps land immediately rather than flying through every slide in between
+const jump=i=>{
+  i=Math.max(0,Math.min(slides.length-1,i));
+  main.scrollTo({top:i*main.clientHeight,behavior:'auto'});
+  settle();
+};
 addEventListener('keydown',e=>{
   const k=e.key;
   if(k==='ArrowDown'||k==='PageDown'||k==='j'||k===' '){e.preventDefault();go(cur+1);}
@@ -961,5 +1541,5 @@ const sync=()=>root.style.setProperty('--fw-real', stage0.getBoundingClientRect(
 new ResizeObserver(sync).observe(stage0); addEventListener('resize',sync); sync();
 root.dataset.ink=slides[0].dataset.ink;
 slides[0].classList.add('in');slides[0].classList.add('current');
-cur=0; settle();
+cur=0; settle(); paintDots(0);
 </script></body></html>
